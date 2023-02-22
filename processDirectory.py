@@ -39,7 +39,7 @@ with open("./log_processDirectory.txt", 'w') as logfile:
     #regex : a number (at least one digit) + eventually a letter + R or V + .JPG or -COL.JPG
     #regex_filename = re.compile(r'([0-9]+[a-zA-Z]?)(R|V)(-COL)?\.JPG')
     #regex_filename = re.compile(r'([0-9]+(_[a-zA-Z])?)_(r|v)_(IR|CL)\.JPG')
-    regex_filename = re.compile(r'([a-zA-Z0-9_+]+)_(r|v)_(IR|CL)\.(JPG|png)')
+    regex_filename = re.compile(r'([a-zA-Z0-9_+]+)_(r|v)_(IR|CL)\.(jpg|JPG|PNG|png)')
 
     logfile.write("Parsing files in inputDir :\n")
     fragments = {}
@@ -105,70 +105,74 @@ with open("./log_processDirectory.txt", 'w') as logfile:
         logfile.write("    fragment {}:\n".format(f.name))
         print("fragment {}/{}".format(cpt, len(fragments)))
         fragDir = args.outputDir+dataconfig.FRAGMENT_DIRECTORY+f.name+"/"
-        ##### shape extraction #####
-        if(f.IRR_file):
-            logfile.write("        extracting IRR shape from : {}\n".format(f.IRR_file)) 
-            im = cv2.imread(fragDir+f.IRR_file)
-            object = cv2.cvtColor(cv2.imread(args.object), cv2.COLOR_BGR2GRAY)
-            shapeExt, ppc = segmentation.extractShape(im, True, 15, shape_arucoMarkers, shape_arucoDict, object, shape_ellipseSize, shape_blurSize)
-            f.IRR_pixelsPerCentimeter = ppc
-            shapeVisu = segmentation.createMaskVisualization(im, shapeExt)
-            cv2.imwrite(fragDir+dataconfig.FRAGMENT_SHAPE_MASK_IRR, shapeExt)
-            f.IRR_shapeMask = dataconfig.FRAGMENT_SHAPE_MASK_IRR
-            cv2.imwrite(args.outputDir+dataconfig.RESULT_VISUALIZATION+f.name+"IRR.png", shapeVisu)
-            mask = np.zeros_like(im)
-            mask[:,:,0] = shapeExt
-            mask[:,:,1] = shapeExt
-            mask[:,:,2] = shapeExt
-            cv2.imwrite(args.outputDir+f.fragDir+f.name+"_IRR.png", cv2.subtract(im, cv2.bitwise_not(mask)))
 
-        if(f.IRV_file):
-            logfile.write("        extracting IRV shape from : {}\n".format(f.IRV_file))
-            im = cv2.imread(fragDir+f.IRV_file)
-            object = cv2.cvtColor(cv2.imread(args.object), cv2.COLOR_BGR2GRAY)
-            shapeExt, ppc = segmentation.extractShape(im, True, 15, shape_arucoMarkers, shape_arucoDict, object, shape_ellipseSize, shape_blurSize)
-            f.IRV_pixelsPerCentimeter = ppc
-            shapeVisu = segmentation.createMaskVisualization(im, shapeExt)
-            cv2.imwrite(fragDir+dataconfig.FRAGMENT_SHAPE_MASK_IRV, shapeExt)
-            f.IRV_shapeMask = dataconfig.FRAGMENT_SHAPE_MASK_IRV
-            cv2.imwrite(args.outputDir+dataconfig.RESULT_VISUALIZATION+f.name+"IRV.png", shapeVisu)
-            mask = np.zeros_like(im)
-            mask[:,:,0] = shapeExt
-            mask[:,:,1] = shapeExt
-            mask[:,:,2] = shapeExt
-            cv2.imwrite(args.outputDir+f.fragDir+f.name+"_IRV.png", cv2.subtract(im, cv2.bitwise_not(mask)))
-            
-        if(f.COLR_file):
-            logfile.write("        extracting COLR shape from : {}\n".format(f.COLR_file))
-            im = cv2.imread(fragDir+f.COLR_file)
-            object = cv2.cvtColor(cv2.imread(args.object), cv2.COLOR_BGR2GRAY)
-            shapeExt, ppc = segmentation.extractShape(im, True, 15, shape_arucoMarkers, shape_arucoDict, object, shape_ellipseSize, shape_blurSize)
-            f.COLR_pixelsPerCentimeter = ppc
-            shapeVisu = segmentation.createMaskVisualization(im, shapeExt)
-            cv2.imwrite(fragDir+dataconfig.FRAGMENT_SHAPE_MASK_COLR, shapeExt)
-            f.COLR_shapeMask = dataconfig.FRAGMENT_SHAPE_MASK_COLR
-            cv2.imwrite(args.outputDir+dataconfig.RESULT_VISUALIZATION+f.name+"COLR.png", shapeVisu)
-            mask = np.zeros_like(im)
-            mask[:,:,0] = shapeExt
-            mask[:,:,1] = shapeExt
-            mask[:,:,2] = shapeExt
-            cv2.imwrite(args.outputDir+f.fragDir+f.name+"_COLR.png", cv2.subtract(im, cv2.bitwise_not(mask)))
+        try:
+            ##### shape extraction #####
+            if(f.IRR_file):
+                logfile.write("        extracting IRR shape from : {}\n".format(f.IRR_file))
+                im = cv2.imread(fragDir+f.IRR_file)
+                object = cv2.cvtColor(cv2.imread(args.object), cv2.COLOR_BGR2GRAY)
+                shapeExt, ppc = segmentation.extractShape(im, True, 15, shape_arucoMarkers, shape_arucoDict, object, shape_ellipseSize, shape_blurSize)
+                f.IRR_pixelsPerCentimeter = ppc
+                shapeVisu = segmentation.createMaskVisualization(im, shapeExt)
+                cv2.imwrite(fragDir+dataconfig.FRAGMENT_SHAPE_MASK_IRR, shapeExt)
+                f.IRR_shapeMask = dataconfig.FRAGMENT_SHAPE_MASK_IRR
+                cv2.imwrite(args.outputDir+dataconfig.RESULT_VISUALIZATION+f.name+"IRR.png", shapeVisu)
+                mask = np.zeros_like(im)
+                mask[:,:,0] = shapeExt
+                mask[:,:,1] = shapeExt
+                mask[:,:,2] = shapeExt
+                cv2.imwrite(args.outputDir+f.fragDir+f.name+"_IRR.png", cv2.subtract(im, cv2.bitwise_not(mask)))
 
-        if(f.COLV_file):
-            logfile.write("        extracting COLV shape from : {}\n".format(f.COLV_file))
-            im = cv2.imread(fragDir+f.COLV_file)
-            object = cv2.cvtColor(cv2.imread(args.object), cv2.COLOR_BGR2GRAY)
-            shapeExt, ppc = segmentation.extractShape(im, True, 15, shape_arucoMarkers, shape_arucoDict, object, shape_ellipseSize, shape_blurSize)
-            f.COLV_pixelsPerCentimeter = ppc
-            shapeVisu = segmentation.createMaskVisualization(im, shapeExt)
-            cv2.imwrite(fragDir+dataconfig.FRAGMENT_SHAPE_MASK_COLV, shapeExt)
-            f.COLV_shapeMask = dataconfig.FRAGMENT_SHAPE_MASK_COLV
-            cv2.imwrite(args.outputDir+dataconfig.RESULT_VISUALIZATION+f.name+"COLV.png", shapeVisu)
-            mask = np.zeros_like(im)
-            mask[:,:,0] = shapeExt
-            mask[:,:,1] = shapeExt
-            mask[:,:,2] = shapeExt
-            cv2.imwrite(args.outputDir+f.fragDir+f.name+"_COLV.png", cv2.subtract(im, cv2.bitwise_not(mask)))
+            if(f.IRV_file):
+                logfile.write("        extracting IRV shape from : {}\n".format(f.IRV_file))
+                im = cv2.imread(fragDir+f.IRV_file)
+                object = cv2.cvtColor(cv2.imread(args.object), cv2.COLOR_BGR2GRAY)
+                shapeExt, ppc = segmentation.extractShape(im, True, 15, shape_arucoMarkers, shape_arucoDict, object, shape_ellipseSize, shape_blurSize)
+                f.IRV_pixelsPerCentimeter = ppc
+                shapeVisu = segmentation.createMaskVisualization(im, shapeExt)
+                cv2.imwrite(fragDir+dataconfig.FRAGMENT_SHAPE_MASK_IRV, shapeExt)
+                f.IRV_shapeMask = dataconfig.FRAGMENT_SHAPE_MASK_IRV
+                cv2.imwrite(args.outputDir+dataconfig.RESULT_VISUALIZATION+f.name+"IRV.png", shapeVisu)
+                mask = np.zeros_like(im)
+                mask[:,:,0] = shapeExt
+                mask[:,:,1] = shapeExt
+                mask[:,:,2] = shapeExt
+                cv2.imwrite(args.outputDir+f.fragDir+f.name+"_IRV.png", cv2.subtract(im, cv2.bitwise_not(mask)))
+
+            if(f.COLR_file):
+                logfile.write("        extracting COLR shape from : {}\n".format(f.COLR_file))
+                im = cv2.imread(fragDir+f.COLR_file)
+                object = cv2.cvtColor(cv2.imread(args.object), cv2.COLOR_BGR2GRAY)
+                shapeExt, ppc = segmentation.extractShape(im, True, 15, shape_arucoMarkers, shape_arucoDict, object, shape_ellipseSize, shape_blurSize)
+                f.COLR_pixelsPerCentimeter = ppc
+                shapeVisu = segmentation.createMaskVisualization(im, shapeExt)
+                cv2.imwrite(fragDir+dataconfig.FRAGMENT_SHAPE_MASK_COLR, shapeExt)
+                f.COLR_shapeMask = dataconfig.FRAGMENT_SHAPE_MASK_COLR
+                cv2.imwrite(args.outputDir+dataconfig.RESULT_VISUALIZATION+f.name+"COLR.png", shapeVisu)
+                mask = np.zeros_like(im)
+                mask[:,:,0] = shapeExt
+                mask[:,:,1] = shapeExt
+                mask[:,:,2] = shapeExt
+                cv2.imwrite(args.outputDir+f.fragDir+f.name+"_COLR.png", cv2.subtract(im, cv2.bitwise_not(mask)))
+
+            if(f.COLV_file):
+                logfile.write("        extracting COLV shape from : {}\n".format(f.COLV_file))
+                im = cv2.imread(fragDir+f.COLV_file)
+                object = cv2.cvtColor(cv2.imread(args.object), cv2.COLOR_BGR2GRAY)
+                shapeExt, ppc = segmentation.extractShape(im, True, 15, shape_arucoMarkers, shape_arucoDict, object, shape_ellipseSize, shape_blurSize)
+                f.COLV_pixelsPerCentimeter = ppc
+                shapeVisu = segmentation.createMaskVisualization(im, shapeExt)
+                cv2.imwrite(fragDir+dataconfig.FRAGMENT_SHAPE_MASK_COLV, shapeExt)
+                f.COLV_shapeMask = dataconfig.FRAGMENT_SHAPE_MASK_COLV
+                cv2.imwrite(args.outputDir+dataconfig.RESULT_VISUALIZATION+f.name+"COLV.png", shapeVisu)
+                mask = np.zeros_like(im)
+                mask[:,:,0] = shapeExt
+                mask[:,:,1] = shapeExt
+                mask[:,:,2] = shapeExt
+                cv2.imwrite(args.outputDir+f.fragDir+f.name+"_COLV.png", cv2.subtract(im, cv2.bitwise_not(mask)))
+        except segmentation.MarkerNotFoundException:
+            logfile.write(" Couldn't detect markers!!!!")
         
     logfile.write("Shape extraction is over.\n")
     logfile.write("list of extracted fragments :\n")

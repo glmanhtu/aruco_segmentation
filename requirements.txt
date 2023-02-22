@@ -1,0 +1,4 @@
+tinydb~=4.7.1
+numpy~=1.24.2
+pyswarm~=0.6
+opencv-contrib-python==4.6.0.66
