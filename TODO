@@ -1,0 +1,7 @@
+- database folder with subfolders for original image, shape extraction masks, extracted fragment image, database containing all these images paths
+
+- python program to process a folder of images and store the result in another folder for review
+  - detect images in the folder with same name, if IRR and IRV -> shape extract, align, if COLR and COLV -> shape extract and align  if both IR and COL -> align
+- python program to insert results from the review folder to the database folder
+- python program to visualize all the data and images of a fragment from an id or a name
+

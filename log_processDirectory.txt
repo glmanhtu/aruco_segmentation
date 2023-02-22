@@ -1,0 +1,177 @@
+processDirectory    inputDir = ./toProcess/  outputDir = ./tmp4/
+creating subdirectories in outputDir
+Parsing files in inputDir :
+    708_a_r_IR.JPG
+    new fragment 708_a
+    804_v_IR.JPG
+    new fragment 804
+    old
+    1242_r_CL.JPG
+    new fragment 1242
+    1424_a_v_CL.JPG
+    new fragment 1424_a
+    803_a_v_IR.JPG
+    new fragment 803_a
+    708_a_r_CL.JPG
+    1278_c_v_CL.JPG
+    new fragment 1278_c
+    1278_b_r_IR.JPG
+    new fragment 1278_b
+    804_r_CL.JPG
+    1278_b_v_CL.JPG
+    806_r_CL.JPG
+    new fragment 806
+    2847_v_CL.JPG
+    new fragment 2847
+    708_b_v_IR.JPG
+    new fragment 708_b
+    1242_r_IR.JPG
+    807_r_CL.JPG
+    new fragment 807
+    708_a_v_CL.JPG
+    803_b_v_IR.JPG
+    new fragment 803_b
+    805_v_IR.JPG
+    new fragment 805
+    1424_a_r_IR.JPG
+    804_v_CL.JPG
+    803_a_r_IR.JPG
+    804_r_IR.JPG
+    803_a_r_CL.JPG
+    1242_v_IR.JPG
+    1278_c_r_IR.JPG
+    1424_a_v_IR.JPG
+    802_r_IR.JPG
+    new fragment 802
+    802_v_CL.JPG
+    708_b_v_CL.JPG
+    1278_b_v_IR.JPG
+    1278_c_v_IR.JPG
+    807_v_CL.JPG
+    1278_b_r_CL.JPG
+    805_v_CL.JPG
+    805_r_IR.JPG
+    805_r_CL.JPG
+    803_b_r_IR.JPG
+    1242_v_CL.JPG
+    708_b_r_CL.JPG
+    1278_c_r_CL.JPG
+    803_a_v_CL.JPG
+    807_r_IR.JPG
+    806_v_IR.JPG
+    802_v_IR.JPG
+    803_b_v_CL.JPG
+    2847_v_IR.JPG
+    806_r_IR.JPG
+    807_v_IR.JPG
+    2847_r_IR.JPG
+    803_b_r_CL.JPG
+    708_a_v_IR.JPG
+    802_r_CL.JPG
+    708_b_r_IR.JPG
+    2847_r_CL.JPG
+    1424_a_r_CL.JPG
+    806_v_CL.JPG
+inputDir parsing is over
+list of parsed fragments :
+    {'id': None, 'name': '708_a', 'IRR_file': '708_a_r_IR.JPG', 'IRR_pixelsPerCentimeter': None, 'IRR_shapeMask': False, 'IRV_file': '708_a_v_IR.JPG', 'IRV_pixelsPerCentimeter': None, 'IRV_shapeMask': False, 'COLR_file': '708_a_r_CL.JPG', 'COLR_pixelsPerCentimeter': None, 'COLR_shapeMask': False, 'COLV_file': '708_a_v_CL.JPG', 'COLV_pixelsPerCentimeter': None, 'COLV_shapeMask': False, 'IRRV_transformation': None, 'COLRV_transformation': None, 'processState': None, 'fragDir': 'fragments/708_a/'}
+    {'id': None, 'name': '804', 'IRR_file': '804_r_IR.JPG', 'IRR_pixelsPerCentimeter': None, 'IRR_shapeMask': False, 'IRV_file': '804_v_IR.JPG', 'IRV_pixelsPerCentimeter': None, 'IRV_shapeMask': False, 'COLR_file': '804_r_CL.JPG', 'COLR_pixelsPerCentimeter': None, 'COLR_shapeMask': False, 'COLV_file': '804_v_CL.JPG', 'COLV_pixelsPerCentimeter': None, 'COLV_shapeMask': False, 'IRRV_transformation': None, 'COLRV_transformation': None, 'processState': None, 'fragDir': 'fragments/804/'}
+    {'id': None, 'name': '1242', 'IRR_file': '1242_r_IR.JPG', 'IRR_pixelsPerCentimeter': None, 'IRR_shapeMask': False, 'IRV_file': '1242_v_IR.JPG', 'IRV_pixelsPerCentimeter': None, 'IRV_shapeMask': False, 'COLR_file': '1242_r_CL.JPG', 'COLR_pixelsPerCentimeter': None, 'COLR_shapeMask': False, 'COLV_file': '1242_v_CL.JPG', 'COLV_pixelsPerCentimeter': None, 'COLV_shapeMask': False, 'IRRV_transformation': None, 'COLRV_transformation': None, 'processState': None, 'fragDir': 'fragments/1242/'}
+    {'id': None, 'name': '1424_a', 'IRR_file': '1424_a_r_IR.JPG', 'IRR_pixelsPerCentimeter': None, 'IRR_shapeMask': False, 'IRV_file': '1424_a_v_IR.JPG', 'IRV_pixelsPerCentimeter': None, 'IRV_shapeMask': False, 'COLR_file': '1424_a_r_CL.JPG', 'COLR_pixelsPerCentimeter': None, 'COLR_shapeMask': False, 'COLV_file': '1424_a_v_CL.JPG', 'COLV_pixelsPerCentimeter': None, 'COLV_shapeMask': False, 'IRRV_transformation': None, 'COLRV_transformation': None, 'processState': None, 'fragDir': 'fragments/1424_a/'}
+    {'id': None, 'name': '803_a', 'IRR_file': '803_a_r_IR.JPG', 'IRR_pixelsPerCentimeter': None, 'IRR_shapeMask': False, 'IRV_file': '803_a_v_IR.JPG', 'IRV_pixelsPerCentimeter': None, 'IRV_shapeMask': False, 'COLR_file': '803_a_r_CL.JPG', 'COLR_pixelsPerCentimeter': None, 'COLR_shapeMask': False, 'COLV_file': '803_a_v_CL.JPG', 'COLV_pixelsPerCentimeter': None, 'COLV_shapeMask': False, 'IRRV_transformation': None, 'COLRV_transformation': None, 'processState': None, 'fragDir': 'fragments/803_a/'}
+    {'id': None, 'name': '1278_c', 'IRR_file': '1278_c_r_IR.JPG', 'IRR_pixelsPerCentimeter': None, 'IRR_shapeMask': False, 'IRV_file': '1278_c_v_IR.JPG', 'IRV_pixelsPerCentimeter': None, 'IRV_shapeMask': False, 'COLR_file': '1278_c_r_CL.JPG', 'COLR_pixelsPerCentimeter': None, 'COLR_shapeMask': False, 'COLV_file': '1278_c_v_CL.JPG', 'COLV_pixelsPerCentimeter': None, 'COLV_shapeMask': False, 'IRRV_transformation': None, 'COLRV_transformation': None, 'processState': None, 'fragDir': 'fragments/1278_c/'}
+    {'id': None, 'name': '1278_b', 'IRR_file': '1278_b_r_IR.JPG', 'IRR_pixelsPerCentimeter': None, 'IRR_shapeMask': False, 'IRV_file': '1278_b_v_IR.JPG', 'IRV_pixelsPerCentimeter': None, 'IRV_shapeMask': False, 'COLR_file': '1278_b_r_CL.JPG', 'COLR_pixelsPerCentimeter': None, 'COLR_shapeMask': False, 'COLV_file': '1278_b_v_CL.JPG', 'COLV_pixelsPerCentimeter': None, 'COLV_shapeMask': False, 'IRRV_transformation': None, 'COLRV_transformation': None, 'processState': None, 'fragDir': 'fragments/1278_b/'}
+    {'id': None, 'name': '806', 'IRR_file': '806_r_IR.JPG', 'IRR_pixelsPerCentimeter': None, 'IRR_shapeMask': False, 'IRV_file': '806_v_IR.JPG', 'IRV_pixelsPerCentimeter': None, 'IRV_shapeMask': False, 'COLR_file': '806_r_CL.JPG', 'COLR_pixelsPerCentimeter': None, 'COLR_shapeMask': False, 'COLV_file': '806_v_CL.JPG', 'COLV_pixelsPerCentimeter': None, 'COLV_shapeMask': False, 'IRRV_transformation': None, 'COLRV_transformation': None, 'processState': None, 'fragDir': 'fragments/806/'}
+    {'id': None, 'name': '2847', 'IRR_file': '2847_r_IR.JPG', 'IRR_pixelsPerCentimeter': None, 'IRR_shapeMask': False, 'IRV_file': '2847_v_IR.JPG', 'IRV_pixelsPerCentimeter': None, 'IRV_shapeMask': False, 'COLR_file': '2847_r_CL.JPG', 'COLR_pixelsPerCentimeter': None, 'COLR_shapeMask': False, 'COLV_file': '2847_v_CL.JPG', 'COLV_pixelsPerCentimeter': None, 'COLV_shapeMask': False, 'IRRV_transformation': None, 'COLRV_transformation': None, 'processState': None, 'fragDir': 'fragments/2847/'}
+    {'id': None, 'name': '708_b', 'IRR_file': '708_b_r_IR.JPG', 'IRR_pixelsPerCentimeter': None, 'IRR_shapeMask': False, 'IRV_file': '708_b_v_IR.JPG', 'IRV_pixelsPerCentimeter': None, 'IRV_shapeMask': False, 'COLR_file': '708_b_r_CL.JPG', 'COLR_pixelsPerCentimeter': None, 'COLR_shapeMask': False, 'COLV_file': '708_b_v_CL.JPG', 'COLV_pixelsPerCentimeter': None, 'COLV_shapeMask': False, 'IRRV_transformation': None, 'COLRV_transformation': None, 'processState': None, 'fragDir': 'fragments/708_b/'}
+    {'id': None, 'name': '807', 'IRR_file': '807_r_IR.JPG', 'IRR_pixelsPerCentimeter': None, 'IRR_shapeMask': False, 'IRV_file': '807_v_IR.JPG', 'IRV_pixelsPerCentimeter': None, 'IRV_shapeMask': False, 'COLR_file': '807_r_CL.JPG', 'COLR_pixelsPerCentimeter': None, 'COLR_shapeMask': False, 'COLV_file': '807_v_CL.JPG', 'COLV_pixelsPerCentimeter': None, 'COLV_shapeMask': False, 'IRRV_transformation': None, 'COLRV_transformation': None, 'processState': None, 'fragDir': 'fragments/807/'}
+    {'id': None, 'name': '803_b', 'IRR_file': '803_b_r_IR.JPG', 'IRR_pixelsPerCentimeter': None, 'IRR_shapeMask': False, 'IRV_file': '803_b_v_IR.JPG', 'IRV_pixelsPerCentimeter': None, 'IRV_shapeMask': False, 'COLR_file': '803_b_r_CL.JPG', 'COLR_pixelsPerCentimeter': None, 'COLR_shapeMask': False, 'COLV_file': '803_b_v_CL.JPG', 'COLV_pixelsPerCentimeter': None, 'COLV_shapeMask': False, 'IRRV_transformation': None, 'COLRV_transformation': None, 'processState': None, 'fragDir': 'fragments/803_b/'}
+    {'id': None, 'name': '805', 'IRR_file': '805_r_IR.JPG', 'IRR_pixelsPerCentimeter': None, 'IRR_shapeMask': False, 'IRV_file': '805_v_IR.JPG', 'IRV_pixelsPerCentimeter': None, 'IRV_shapeMask': False, 'COLR_file': '805_r_CL.JPG', 'COLR_pixelsPerCentimeter': None, 'COLR_shapeMask': False, 'COLV_file': '805_v_CL.JPG', 'COLV_pixelsPerCentimeter': None, 'COLV_shapeMask': False, 'IRRV_transformation': None, 'COLRV_transformation': None, 'processState': None, 'fragDir': 'fragments/805/'}
+    {'id': None, 'name': '802', 'IRR_file': '802_r_IR.JPG', 'IRR_pixelsPerCentimeter': None, 'IRR_shapeMask': False, 'IRV_file': '802_v_IR.JPG', 'IRV_pixelsPerCentimeter': None, 'IRV_shapeMask': False, 'COLR_file': '802_r_CL.JPG', 'COLR_pixelsPerCentimeter': None, 'COLR_shapeMask': False, 'COLV_file': '802_v_CL.JPG', 'COLV_pixelsPerCentimeter': None, 'COLV_shapeMask': False, 'IRRV_transformation': None, 'COLRV_transformation': None, 'processState': None, 'fragDir': 'fragments/802/'}
+Extracting shapes :
+    fragment 708_a:
+        extracting IRR shape from : 708_a_r_IR.JPG
+        extracting IRV shape from : 708_a_v_IR.JPG
+        extracting COLR shape from : 708_a_r_CL.JPG
+        extracting COLV shape from : 708_a_v_CL.JPG
+    fragment 804:
+        extracting IRR shape from : 804_r_IR.JPG
+        extracting IRV shape from : 804_v_IR.JPG
+        extracting COLR shape from : 804_r_CL.JPG
+        extracting COLV shape from : 804_v_CL.JPG
+    fragment 1242:
+        extracting IRR shape from : 1242_r_IR.JPG
+        extracting IRV shape from : 1242_v_IR.JPG
+        extracting COLR shape from : 1242_r_CL.JPG
+        extracting COLV shape from : 1242_v_CL.JPG
+    fragment 1424_a:
+        extracting IRR shape from : 1424_a_r_IR.JPG
+        extracting IRV shape from : 1424_a_v_IR.JPG
+        extracting COLR shape from : 1424_a_r_CL.JPG
+        extracting COLV shape from : 1424_a_v_CL.JPG
+    fragment 803_a:
+        extracting IRR shape from : 803_a_r_IR.JPG
+        extracting IRV shape from : 803_a_v_IR.JPG
+        extracting COLR shape from : 803_a_r_CL.JPG
+        extracting COLV shape from : 803_a_v_CL.JPG
+    fragment 1278_c:
+        extracting IRR shape from : 1278_c_r_IR.JPG
+        extracting IRV shape from : 1278_c_v_IR.JPG
+        extracting COLR shape from : 1278_c_r_CL.JPG
+        extracting COLV shape from : 1278_c_v_CL.JPG
+    fragment 1278_b:
+        extracting IRR shape from : 1278_b_r_IR.JPG
+        extracting IRV shape from : 1278_b_v_IR.JPG
+        extracting COLR shape from : 1278_b_r_CL.JPG
+        extracting COLV shape from : 1278_b_v_CL.JPG
+    fragment 806:
+        extracting IRR shape from : 806_r_IR.JPG
+        extracting IRV shape from : 806_v_IR.JPG
+        extracting COLR shape from : 806_r_CL.JPG
+        extracting COLV shape from : 806_v_CL.JPG
+    fragment 2847:
+        extracting IRR shape from : 2847_r_IR.JPG
+        extracting IRV shape from : 2847_v_IR.JPG
+        extracting COLR shape from : 2847_r_CL.JPG
+        extracting COLV shape from : 2847_v_CL.JPG
+    fragment 708_b:
+        extracting IRR shape from : 708_b_r_IR.JPG
+        extracting IRV shape from : 708_b_v_IR.JPG
+        extracting COLR shape from : 708_b_r_CL.JPG
+        extracting COLV shape from : 708_b_v_CL.JPG
+    fragment 807:
+        extracting IRR shape from : 807_r_IR.JPG
+        extracting IRV shape from : 807_v_IR.JPG
+        extracting COLR shape from : 807_r_CL.JPG
+        extracting COLV shape from : 807_v_CL.JPG
+    fragment 803_b:
+        extracting IRR shape from : 803_b_r_IR.JPG
+        extracting IRV shape from : 803_b_v_IR.JPG
+        extracting COLR shape from : 803_b_r_CL.JPG
+        extracting COLV shape from : 803_b_v_CL.JPG
+    fragment 805:
+        extracting IRR shape from : 805_r_IR.JPG
+        extracting IRV shape from : 805_v_IR.JPG
+        extracting COLR shape from : 805_r_CL.JPG
+        extracting COLV shape from : 805_v_CL.JPG
+    fragment 802:
+        extracting IRR shape from : 802_r_IR.JPG
+        extracting IRV shape from : 802_v_IR.JPG
+        extracting COLR shape from : 802_r_CL.JPG
+        extracting COLV shape from : 802_v_CL.JPG
+Shape extraction is over.
+list of extracted fragments :
+    {'id': None, 'name': '708_a', 'IRR_file': '708_a_r_IR.JPG', 'IRR_pixelsPerCentimeter': 137.51395002635368, 'IRR_shapeMask': 'shapeMask_IRR.png', 'IRV_file': '708_a_v_IR.JPG', 'IRV_pixelsPerCentimeter': 137.6355686301772, 'IRV_shapeMask': 'shapeMask_IRV.png', 'COLR_file': '708_a_r_CL.JPG', 'COLR_pixelsPerCentimeter': 131.77446303281744, 'COLR_shapeMask': 'shapeMask_COLR.png', 'COLV_file': '708_a_v_CL.JPG', 'COLV_pixelsPerCentimeter': 131.8338577354716, 'COLV_shapeMask': 'shapeMask_COLV.png', 'IRRV_transformation': None, 'COLRV_transformation': None, 'processState': None, 'fragDir': 'fragments/708_a/'}
+    {'id': None, 'name': '804', 'IRR_file': '804_r_IR.JPG', 'IRR_pixelsPerCentimeter': 230.27102532436075, 'IRR_shapeMask': 'shapeMask_IRR.png', 'IRV_file': '804_v_IR.JPG', 'IRV_pixelsPerCentimeter': 230.68362473792658, 'IRV_shapeMask': 'shapeMask_IRV.png', 'COLR_file': '804_r_CL.JPG', 'COLR_pixelsPerCentimeter': 214.30242838615075, 'COLR_shapeMask': 'shapeMask_COLR.png', 'COLV_file': '804_v_CL.JPG', 'COLV_pixelsPerCentimeter': 213.90392059951083, 'COLV_shapeMask': 'shapeMask_COLV.png', 'IRRV_transformation': None, 'COLRV_transformation': None, 'processState': None, 'fragDir': 'fragments/804/'}
+    {'id': None, 'name': '1242', 'IRR_file': '1242_r_IR.JPG', 'IRR_pixelsPerCentimeter': 232.35322287066657, 'IRR_shapeMask': 'shapeMask_IRR.png', 'IRV_file': '1242_v_IR.JPG', 'IRV_pixelsPerCentimeter': 232.5174233920378, 'IRV_shapeMask': 'shapeMask_IRV.png', 'COLR_file': '1242_r_CL.JPG', 'COLR_pixelsPerCentimeter': 227.30065081970258, 'COLR_shapeMask': 'shapeMask_COLR.png', 'COLV_file': '1242_v_CL.JPG', 'COLV_pixelsPerCentimeter': 227.23379468569385, 'COLV_shapeMask': 'shapeMask_COLV.png', 'IRRV_transformation': None, 'COLRV_transformation': None, 'processState': None, 'fragDir': 'fragments/1242/'}
+    {'id': None, 'name': '1424_a', 'IRR_file': '1424_a_r_IR.JPG', 'IRR_pixelsPerCentimeter': 123.80011230414348, 'IRR_shapeMask': 'shapeMask_IRR.png', 'IRV_file': '1424_a_v_IR.JPG', 'IRV_pixelsPerCentimeter': 123.83781360346944, 'IRV_shapeMask': 'shapeMask_IRV.png', 'COLR_file': '1424_a_r_CL.JPG', 'COLR_pixelsPerCentimeter': 117.96673223923656, 'COLR_shapeMask': 'shapeMask_COLR.png', 'COLV_file': '1424_a_v_CL.JPG', 'COLV_pixelsPerCentimeter': 118.3531484622327, 'COLV_shapeMask': 'shapeMask_COLV.png', 'IRRV_transformation': None, 'COLRV_transformation': None, 'processState': None, 'fragDir': 'fragments/1424_a/'}
+    {'id': None, 'name': '803_a', 'IRR_file': '803_a_r_IR.JPG', 'IRR_pixelsPerCentimeter': 232.33770029455124, 'IRR_shapeMask': 'shapeMask_IRR.png', 'IRV_file': '803_a_v_IR.JPG', 'IRV_pixelsPerCentimeter': 231.93565678586464, 'IRV_shapeMask': 'shapeMask_IRV.png', 'COLR_file': '803_a_r_CL.JPG', 'COLR_pixelsPerCentimeter': 214.90739974085676, 'COLR_shapeMask': 'shapeMask_COLR.png', 'COLV_file': '803_a_v_CL.JPG', 'COLV_pixelsPerCentimeter': 214.80439077846052, 'COLV_shapeMask': 'shapeMask_COLV.png', 'IRRV_transformation': None, 'COLRV_transformation': None, 'processState': None, 'fragDir': 'fragments/803_a/'}
+    {'id': None, 'name': '1278_c', 'IRR_file': '1278_c_r_IR.JPG', 'IRR_pixelsPerCentimeter': 204.72643603699572, 'IRR_shapeMask': 'shapeMask_IRR.png', 'IRV_file': '1278_c_v_IR.JPG', 'IRV_pixelsPerCentimeter': 204.80479624899291, 'IRV_shapeMask': 'shapeMask_IRV.png', 'COLR_file': '1278_c_r_CL.JPG', 'COLR_pixelsPerCentimeter': 213.31737055861635, 'COLR_shapeMask': 'shapeMask_COLR.png', 'COLV_file': '1278_c_v_CL.JPG', 'COLV_pixelsPerCentimeter': 213.41991132939148, 'COLV_shapeMask': 'shapeMask_COLV.png', 'IRRV_transformation': None, 'COLRV_transformation': None, 'processState': None, 'fragDir': 'fragments/1278_c/'}
+    {'id': None, 'name': '1278_b', 'IRR_file': '1278_b_r_IR.JPG', 'IRR_pixelsPerCentimeter': 208.8505916320407, 'IRR_shapeMask': 'shapeMask_IRR.png', 'IRV_file': '1278_b_v_IR.JPG', 'IRV_pixelsPerCentimeter': 208.88448538680063, 'IRV_shapeMask': 'shapeMask_IRV.png', 'COLR_file': '1278_b_r_CL.JPG', 'COLR_pixelsPerCentimeter': 199.26348617607624, 'COLR_shapeMask': 'shapeMask_COLR.png', 'COLV_file': '1278_b_v_CL.JPG', 'COLV_pixelsPerCentimeter': 199.3834208120089, 'COLV_shapeMask': 'shapeMask_COLV.png', 'IRRV_transformation': None, 'COLRV_transformation': None, 'processState': None, 'fragDir': 'fragments/1278_b/'}
+    {'id': None, 'name': '806', 'IRR_file': '806_r_IR.JPG', 'IRR_pixelsPerCentimeter': 229.63457322918111, 'IRR_shapeMask': 'shapeMask_IRR.png', 'IRV_file': '806_v_IR.JPG', 'IRV_pixelsPerCentimeter': 230.52832249294931, 'IRV_shapeMask': 'shapeMask_IRV.png', 'COLR_file': '806_r_CL.JPG', 'COLR_pixelsPerCentimeter': 214.02174813317185, 'COLR_shapeMask': 'shapeMask_COLR.png', 'COLV_file': '806_v_CL.JPG', 'COLV_pixelsPerCentimeter': 214.17342289635826, 'COLV_shapeMask': 'shapeMask_COLV.png', 'IRRV_transformation': None, 'COLRV_transformation': None, 'processState': None, 'fragDir': 'fragments/806/'}
+    {'id': None, 'name': '2847', 'IRR_file': '2847_r_IR.JPG', 'IRR_pixelsPerCentimeter': 163.2361760154725, 'IRR_shapeMask': 'shapeMask_IRR.png', 'IRV_file': '2847_v_IR.JPG', 'IRV_pixelsPerCentimeter': 162.75061759841725, 'IRV_shapeMask': 'shapeMask_IRV.png', 'COLR_file': '2847_r_CL.JPG', 'COLR_pixelsPerCentimeter': 167.07961327164261, 'COLR_shapeMask': 'shapeMask_COLR.png', 'COLV_file': '2847_v_CL.JPG', 'COLV_pixelsPerCentimeter': 167.10851355449435, 'COLV_shapeMask': 'shapeMask_COLV.png', 'IRRV_transformation': None, 'COLRV_transformation': None, 'processState': None, 'fragDir': 'fragments/2847/'}
+    {'id': None, 'name': '708_b', 'IRR_file': '708_b_r_IR.JPG', 'IRR_pixelsPerCentimeter': 139.23557773319982, 'IRR_shapeMask': 'shapeMask_IRR.png', 'IRV_file': '708_b_v_IR.JPG', 'IRV_pixelsPerCentimeter': 139.06949362587707, 'IRV_shapeMask': 'shapeMask_IRV.png', 'COLR_file': '708_b_r_CL.JPG', 'COLR_pixelsPerCentimeter': 134.4600071980969, 'COLR_shapeMask': 'shapeMask_COLR.png', 'COLV_file': '708_b_v_CL.JPG', 'COLV_pixelsPerCentimeter': 134.88701385158097, 'COLV_shapeMask': 'shapeMask_COLV.png', 'IRRV_transformation': None, 'COLRV_transformation': None, 'processState': None, 'fragDir': 'fragments/708_b/'}
+    {'id': None, 'name': '807', 'IRR_file': '807_r_IR.JPG', 'IRR_pixelsPerCentimeter': 230.30027270835333, 'IRR_shapeMask': 'shapeMask_IRR.png', 'IRV_file': '807_v_IR.JPG', 'IRV_pixelsPerCentimeter': 230.59347245495468, 'IRV_shapeMask': 'shapeMask_IRV.png', 'COLR_file': '807_r_CL.JPG', 'COLR_pixelsPerCentimeter': 215.68558050849828, 'COLR_shapeMask': 'shapeMask_COLR.png', 'COLV_file': '807_v_CL.JPG', 'COLV_pixelsPerCentimeter': 215.5317867213455, 'COLV_shapeMask': 'shapeMask_COLV.png', 'IRRV_transformation': None, 'COLRV_transformation': None, 'processState': None, 'fragDir': 'fragments/807/'}
+    {'id': None, 'name': '803_b', 'IRR_file': '803_b_r_IR.JPG', 'IRR_pixelsPerCentimeter': 232.1385906901871, 'IRR_shapeMask': 'shapeMask_IRR.png', 'IRV_file': '803_b_v_IR.JPG', 'IRV_pixelsPerCentimeter': 231.91803878191863, 'IRV_shapeMask': 'shapeMask_IRV.png', 'COLR_file': '803_b_r_CL.JPG', 'COLR_pixelsPerCentimeter': 216.72442018335795, 'COLR_shapeMask': 'shapeMask_COLR.png', 'COLV_file': '803_b_v_CL.JPG', 'COLV_pixelsPerCentimeter': 216.68866024019468, 'COLV_shapeMask': 'shapeMask_COLV.png', 'IRRV_transformation': None, 'COLRV_transformation': None, 'processState': None, 'fragDir': 'fragments/803_b/'}
+    {'id': None, 'name': '805', 'IRR_file': '805_r_IR.JPG', 'IRR_pixelsPerCentimeter': 230.70553587647308, 'IRR_shapeMask': 'shapeMask_IRR.png', 'IRV_file': '805_v_IR.JPG', 'IRV_pixelsPerCentimeter': 230.40880344580523, 'IRV_shapeMask': 'shapeMask_IRV.png', 'COLR_file': '805_r_CL.JPG', 'COLR_pixelsPerCentimeter': 215.80001672863966, 'COLR_shapeMask': 'shapeMask_COLR.png', 'COLV_file': '805_v_CL.JPG', 'COLV_pixelsPerCentimeter': 215.82593591076736, 'COLV_shapeMask': 'shapeMask_COLV.png', 'IRRV_transformation': None, 'COLRV_transformation': None, 'processState': None, 'fragDir': 'fragments/805/'}
+    {'id': None, 'name': '802', 'IRR_file': '802_r_IR.JPG', 'IRR_pixelsPerCentimeter': 230.4503192292824, 'IRR_shapeMask': 'shapeMask_IRR.png', 'IRV_file': '802_v_IR.JPG', 'IRV_pixelsPerCentimeter': 230.75103144045576, 'IRV_shapeMask': 'shapeMask_IRV.png', 'COLR_file': '802_r_CL.JPG', 'COLR_pixelsPerCentimeter': 216.34260283098465, 'COLR_shapeMask': 'shapeMask_COLR.png', 'COLV_file': '802_v_CL.JPG', 'COLV_pixelsPerCentimeter': 217.1833474954596, 'COLV_shapeMask': 'shapeMask_COLV.png', 'IRRV_transformation': None, 'COLRV_transformation': None, 'processState': None, 'fragDir': 'fragments/802/'}

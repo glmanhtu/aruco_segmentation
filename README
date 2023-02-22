@@ -1,0 +1,67 @@
+Création de la base de donnée de fragments pour le côté serveur :
+
+Pour le moment deux programmes : processDirectory.py et manageDirectory.py
+
+processDirectory permet de traiter un dossier contenant des nouvelles photos de fragments.
+On lui passe le dossier contenant ces nouvelles photos et le programme se charge de :
+  - parser les fichiers dans le dossier et les regrouper par nom de fragment
+    A chaque fois qu'un nouvel identifiant de fragment est trouvé, un nouvelle instance de la classe Fragment est créée. Idéalement, à la fin du parsing du dossier, chaque instance de fragment devrait contenir les chemins vers les 4 photos IR/COULEUR RECTO/VERSO.
+  - extraire les formes de chaque photo des fragments trouvés à l"étape précédente.
+     Les masques binaires de segmentation sont enregistrés dans un sous-dossier du dossier output
+     Des images combinant les photos originales avec le segmentation par dessus en rouge sont enregistrés également pour pouvoir vérifier rapidement si l'extraction des fragments a bien fonctionné.
+     
+  - aligner les images recto/verso (pas encore intégré au programme)
+  - aligner les images IR/COULEUR (pas encore intégré non plus)
+
+  - à la fin, le programme sauvegarde toutes les données contenues dans les instances de Fragment dans un fichier json contenu dans le dossier output
+
+
+manageDirectory permet, une fois que processDirectory a été appelé, de choisir quels fragments ont été bien traités et lesquels ne le sont pas. Il permettra également de rapatrier tous les fragments bien traités dans la base de donnée du serveur.
+
+
+
+Exemple d'utilisation :
+Depuis le dossier main, on a des fragments dans le dossier toProcess.
+
+On crée un dossier qui va servir à stocker le résultat de processDirectory :
+mkdir tmp
+
+On appelle processDirectory :
+python3 processDirectory.py -i ./toProcess/ -o ./tmp/ --object ./regle.png
+
+Une fois que le programme a fini son exécution, on peut aller voir dans le dossier ./tmp/VisualizeResults/ pour voir si certaines extractions de fragments n'ont pas fonctionné.
+
+On utilise manageDirectory.py pour voir la liste des fragment :
+python3 manageDirectory.py ./tmp/ list
+
+Cette commande affiche la liste des fragments qui ont été traités par processDirectory ainsi que leur état de validation : 
+  - 'valid' signifie qu'il a été accepté et qui sera rapatrié vers la base de donnée
+  - 'rejected' signifie qu'il a été rejeté
+  - 'unclassified' signifie qu'aucune décision n'a été prise pour ce fragment pour le moment
+
+manageDirectory permet de changer l'état de validation des fragment avec les commandes validate, reject et restore
+
+Voici quelques exemples :
+
+python3 manageDirectory.py validate 2838b 2837c
+->valide les deux fragments listés à la fin de la commande
+
+python3 manageDirectory.py validate -aU
+->valide tous les fragments 'unclassified'  le flag-aR permet de valider tous les fragments rejetés
+
+
+python3 manageDirectory.py reject 2838b 2837c
+->rejette les deux fragments listés à la fin de la commande
+
+python3 manageDirectory.py reject -aU
+->rejette tous les fragments 'unclassified'  le flag-aV permet de rejeter tous les fragments validés
+
+
+python3 manageDirectory.py restore 2838b 2837c
+->restore les deux fragments listés à la fin de la commande à leur état 'unclassified'
+
+python3 manageDirectory.py restore -aV
+->restore tous les fragments 'valid'  le flag-aR permet de restorer tous les fragments rejetés
+
+
+Pour le moment on ne peut pas encore rapatrier les fragments valides à la base de donnée, je suis en train de l'implémenter.
