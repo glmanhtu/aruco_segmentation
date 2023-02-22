@@ -46,22 +46,23 @@ with open("./log_processDirectory.txt", 'w') as logfile:
     for file in os.listdir(args.inputDir):
         print(file)
         logfile.write("    "+file+"\n")
-        #if it is a file
-        if(os.path.isfile(args.inputDir+file)):
+        if os.path.isfile(args.inputDir + file):
             m = re.fullmatch(regex_filename, file)
-            if(m):
+            if m:
                 name = m.group(1)
                 recto = m.group(2) == "r"
                 color = m.group(3) == "CL"
 
-                if(name not in fragments):
+                if name not in fragments:
                     logfile.write("    new fragment {}\n".format(name))
                     print("new fragment : "+name)
                     f = Fragment()
                     f.name = name
                     fragments[name] = f
-                    f.fragDir = dataconfig.FRAGMENT_DIRECTORY+name+"/"
-                    os.makedirs(args.outputDir+dataconfig.FRAGMENT_DIRECTORY+name, exist_ok=True)
+                    f.fragDir = dataconfig.FRAGMENT_DIRECTORY+name + "/"
+                    f.resultDir = dataconfig.RESULT_DIRECTORY + name + "/"
+                    os.makedirs(args.outputDir + dataconfig.FRAGMENT_DIRECTORY + name, exist_ok=True)
+                    os.makedirs(args.outputDir + dataconfig.RESULT_DIRECTORY + name, exist_ok=True)
                 f = fragments[name]
                 if(recto):
                     if(color):
@@ -122,7 +123,10 @@ with open("./log_processDirectory.txt", 'w') as logfile:
                 mask[:,:,0] = shapeExt
                 mask[:,:,1] = shapeExt
                 mask[:,:,2] = shapeExt
-                cv2.imwrite(args.outputDir+f.fragDir+f.name+"_IRR.png", cv2.subtract(im, cv2.bitwise_not(mask)))
+                masked_image = cv2.subtract(im, cv2.bitwise_not(mask))
+                cv2.imwrite(args.outputDir+f.fragDir+f.name+"_IRR.png", masked_image)
+                cv2.imwrite(args.outputDir+f.resultDir+f.name+"_IRR.png", segmentation.crop_image(masked_image, pixel_value=0))
+
 
             if(f.IRV_file):
                 logfile.write("        extracting IRV shape from : {}\n".format(f.IRV_file))
@@ -138,7 +142,9 @@ with open("./log_processDirectory.txt", 'w') as logfile:
                 mask[:,:,0] = shapeExt
                 mask[:,:,1] = shapeExt
                 mask[:,:,2] = shapeExt
-                cv2.imwrite(args.outputDir+f.fragDir+f.name+"_IRV.png", cv2.subtract(im, cv2.bitwise_not(mask)))
+                masked_image = cv2.subtract(im, cv2.bitwise_not(mask))
+                cv2.imwrite(args.outputDir+f.fragDir+f.name+"_IRV.png", masked_image)
+                cv2.imwrite(args.outputDir+f.resultDir+f.name+"_IRV.png", segmentation.crop_image(masked_image, pixel_value=0))
 
             if(f.COLR_file):
                 logfile.write("        extracting COLR shape from : {}\n".format(f.COLR_file))
@@ -154,7 +160,9 @@ with open("./log_processDirectory.txt", 'w') as logfile:
                 mask[:,:,0] = shapeExt
                 mask[:,:,1] = shapeExt
                 mask[:,:,2] = shapeExt
-                cv2.imwrite(args.outputDir+f.fragDir+f.name+"_COLR.png", cv2.subtract(im, cv2.bitwise_not(mask)))
+                masked_image = cv2.subtract(im, cv2.bitwise_not(mask))
+                cv2.imwrite(args.outputDir+f.fragDir+f.name+"_COLR.png", masked_image)
+                cv2.imwrite(args.outputDir+f.resultDir+f.name+"_COLR.png", segmentation.crop_image(masked_image, pixel_value=0))
 
             if(f.COLV_file):
                 logfile.write("        extracting COLV shape from : {}\n".format(f.COLV_file))
@@ -170,64 +178,67 @@ with open("./log_processDirectory.txt", 'w') as logfile:
                 mask[:,:,0] = shapeExt
                 mask[:,:,1] = shapeExt
                 mask[:,:,2] = shapeExt
-                cv2.imwrite(args.outputDir+f.fragDir+f.name+"_COLV.png", cv2.subtract(im, cv2.bitwise_not(mask)))
+                masked_image = cv2.subtract(im, cv2.bitwise_not(mask))
+                cv2.imwrite(args.outputDir+f.fragDir+f.name+"_COLV.png", masked_image)
+                cv2.imwrite(args.outputDir+f.resultDir+f.name+"_COLV.png", segmentation.crop_image(masked_image, pixel_value=0))
+
         except segmentation.MarkerNotFoundException:
-            logfile.write(" Couldn't detect markers!!!!")
+            logfile.write(" Couldn't detect markers!!!!\n")
         
     logfile.write("Shape extraction is over.\n")
-    logfile.write("list of extracted fragments :\n")
-    for k,f in fragments.items():
-        logfile.write("    "+f.toString()+"\n")
+    # logfile.write("list of extracted fragments :\n")
+    # for k,f in fragments.items():
+    #     logfile.write("    "+f.toString()+"\n")
 
-    #recto/verso registration
-    cpt = 0
-    for k,f in fragments.items():
-        cpt += 1
-        print("fragment {}/{}".format(cpt, len(fragments)))
-        fragDir = args.outputDir+dataconfig.FRAGMENT_DIRECTORY+f.name+"/"
-        if(f.IRR_file is not None and f.IRV_file is not None):
-            recto, rectoMask, verso, versoMask = registration.loadRectoVerso(fragDir+f.IRR_file,
-                                                                fragDir+dataconfig.FRAGMENT_SHAPE_MASK_IRR,
-                                                                fragDir+f.IRV_file,
-                                                                fragDir+dataconfig.FRAGMENT_SHAPE_MASK_IRV,
-                                                                applyMask=True)
-            _, rectoSubsample, _, versoSubsample = registration.loadRectoVerso(fragDir+f.IRR_file,
-                                                                  fragDir+dataconfig.FRAGMENT_SHAPE_MASK_IRR,
-                                                                  fragDir+f.IRV_file,
-                                                                  fragDir+dataconfig.FRAGMENT_SHAPE_MASK_IRV,
-                                                                  applyMask=True,
-                                                                  scalingRatio=RVregistration_scalingRatio)            
-
-            transformation = registration.PSOregistration(rectoSubsample, versoSubsample,
-                                             f.IRV_pixelsPerCentimeter/f.IRR_pixelsPerCentimeter,
-                                                          debug=False)
-            f.IRRV_transformation = transformation
-            result = registration.visualizeRegistration(rectoMask, versoMask, *transformation, translationScaling=1/RVregistration_scalingRatio)
-            cv2.imwrite(args.outputDir+dataconfig.RESULT_VISUALIZATION+f.name+"IR_registration.png", result)
-
-        if(f.COLR_file is not None and f.COLV_file is not None):
-            recto, rectoMask, verso, versoMask = registration.loadRectoVerso(fragDir+f.COLR_file,
-                                                                fragDir+dataconfig.FRAGMENT_SHAPE_MASK_COLR,
-                                                                fragDir+f.COLV_file,
-                                                                fragDir+dataconfig.FRAGMENT_SHAPE_MASK_COLV,
-                                                                applyMask=True)
-            _, rectoSubsample, _, versoSubsample = registration.loadRectoVerso(fragDir+f.COLR_file,
-                                                                  fragDir+dataconfig.FRAGMENT_SHAPE_MASK_COLR,
-                                                                  fragDir+f.COLV_file,
-                                                                  fragDir+dataconfig.FRAGMENT_SHAPE_MASK_COLV,
-                                                                  applyMask=True,
-                                                                  scalingRatio=RVregistration_scalingRatio)            
-
-            transformation = registration.PSOregistration(rectoSubsample, versoSubsample,
-                                             f.COLV_pixelsPerCentimeter/f.COLR_pixelsPerCentimeter,
-                                                          debug=False)
-            f.COLRV_transformation = transformation
-
-            result = registration.visualizeRegistration(rectoMask, versoMask, *transformation, translationScaling=1/RVregistration_scalingRatio)
-            cv2.imwrite(args.outputDir+dataconfig.RESULT_VISUALIZATION+f.name+"COL_registration.png", result)
-    #TODO ajouter les autres étapes du pipeline : alignement recto verso  (alignement IR/COLOR ?)
-
-    db = TinyDB(args.outputDir+"frags.json")
-    db.purge_tables()
-    for k, f in fragments.items():
-        f.saveToTinyDB(db, processState=Fragment.PROCESS_STATE_DEFAULT)
+    # #recto/verso registration
+    # cpt = 0
+    # for k,f in fragments.items():
+    #     cpt += 1
+    #     print("fragment {}/{}".format(cpt, len(fragments)))
+    #     fragDir = args.outputDir+dataconfig.FRAGMENT_DIRECTORY+f.name+"/"
+    #     if(f.IRR_file is not None and f.IRV_file is not None):
+    #         recto, rectoMask, verso, versoMask = registration.loadRectoVerso(fragDir+f.IRR_file,
+    #                                                             fragDir+dataconfig.FRAGMENT_SHAPE_MASK_IRR,
+    #                                                             fragDir+f.IRV_file,
+    #                                                             fragDir+dataconfig.FRAGMENT_SHAPE_MASK_IRV,
+    #                                                             applyMask=True)
+    #         _, rectoSubsample, _, versoSubsample = registration.loadRectoVerso(fragDir+f.IRR_file,
+    #                                                               fragDir+dataconfig.FRAGMENT_SHAPE_MASK_IRR,
+    #                                                               fragDir+f.IRV_file,
+    #                                                               fragDir+dataconfig.FRAGMENT_SHAPE_MASK_IRV,
+    #                                                               applyMask=True,
+    #                                                               scalingRatio=RVregistration_scalingRatio)
+    #
+    #         transformation = registration.PSOregistration(rectoSubsample, versoSubsample,
+    #                                          f.IRV_pixelsPerCentimeter/f.IRR_pixelsPerCentimeter,
+    #                                                       debug=False)
+    #         f.IRRV_transformation = transformation
+    #         result = registration.visualizeRegistration(rectoMask, versoMask, *transformation, translationScaling=1/RVregistration_scalingRatio)
+    #         cv2.imwrite(args.outputDir+dataconfig.RESULT_VISUALIZATION+f.name+"IR_registration.png", result)
+    #
+    #     if(f.COLR_file is not None and f.COLV_file is not None):
+    #         recto, rectoMask, verso, versoMask = registration.loadRectoVerso(fragDir+f.COLR_file,
+    #                                                             fragDir+dataconfig.FRAGMENT_SHAPE_MASK_COLR,
+    #                                                             fragDir+f.COLV_file,
+    #                                                             fragDir+dataconfig.FRAGMENT_SHAPE_MASK_COLV,
+    #                                                             applyMask=True)
+    #         _, rectoSubsample, _, versoSubsample = registration.loadRectoVerso(fragDir+f.COLR_file,
+    #                                                               fragDir+dataconfig.FRAGMENT_SHAPE_MASK_COLR,
+    #                                                               fragDir+f.COLV_file,
+    #                                                               fragDir+dataconfig.FRAGMENT_SHAPE_MASK_COLV,
+    #                                                               applyMask=True,
+    #                                                               scalingRatio=RVregistration_scalingRatio)
+    #
+    #         transformation = registration.PSOregistration(rectoSubsample, versoSubsample,
+    #                                          f.COLV_pixelsPerCentimeter/f.COLR_pixelsPerCentimeter,
+    #                                                       debug=False)
+    #         f.COLRV_transformation = transformation
+    #
+    #         result = registration.visualizeRegistration(rectoMask, versoMask, *transformation, translationScaling=1/RVregistration_scalingRatio)
+    #         cv2.imwrite(args.outputDir+dataconfig.RESULT_VISUALIZATION+f.name+"COL_registration.png", result)
+    # #TODO ajouter les autres étapes du pipeline : alignement recto verso  (alignement IR/COLOR ?)
+    #
+    # db = TinyDB(args.outputDir+"frags.json")
+    # db.purge_tables()
+    # for k, f in fragments.items():
+    #     f.saveToTinyDB(db, processState=Fragment.PROCESS_STATE_DEFAULT)

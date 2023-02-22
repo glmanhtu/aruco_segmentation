@@ -32,6 +32,7 @@ class Fragment:
 
         self.databaseDir = None
         self.fragDir = None
+        self.resultDir = None
 
     def loadFromTinyDB(self, dict):
         self.__dict__ = dict
