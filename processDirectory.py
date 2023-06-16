@@ -101,90 +101,107 @@ with open("./log_processDirectory.txt", 'w') as logfile:
 
     logfile.write("Extracting shapes :\n")
     cpt = 0
+    file_with_err = []
     for k,f in fragments.items():
         cpt += 1
         logfile.write("    fragment {}:\n".format(f.name))
         print("fragment {}/{}".format(cpt, len(fragments)))
         fragDir = args.outputDir+dataconfig.FRAGMENT_DIRECTORY+f.name+"/"
-
-        try:
-            ##### shape extraction #####
-            if(f.IRR_file):
-                logfile.write("        extracting IRR shape from : {}\n".format(f.IRR_file))
-                im = cv2.imread(fragDir+f.IRR_file)
-                object = cv2.cvtColor(cv2.imread(args.object), cv2.COLOR_BGR2GRAY)
+        current_file = ''
+        ##### shape extraction #####
+        if(f.IRR_file):
+            logfile.write("        extracting IRR shape from : {}\n".format(f.IRR_file))
+            current_file = fragDir+f.IRR_file
+            im = cv2.imread(current_file)
+            object = cv2.cvtColor(cv2.imread(args.object), cv2.COLOR_BGR2GRAY)
+            try:
                 shapeExt, ppc = segmentation.extractShape(im, True, 15, shape_arucoMarkers, shape_arucoDict, object, shape_ellipseSize, shape_blurSize)
                 f.IRR_pixelsPerCentimeter = ppc
                 shapeVisu = segmentation.createMaskVisualization(im, shapeExt)
                 cv2.imwrite(fragDir+dataconfig.FRAGMENT_SHAPE_MASK_IRR, shapeExt)
                 f.IRR_shapeMask = dataconfig.FRAGMENT_SHAPE_MASK_IRR
-                cv2.imwrite(args.outputDir+dataconfig.RESULT_VISUALIZATION+f.name+"IRR.png", shapeVisu)
+                cv2.imwrite(args.outputDir+dataconfig.RESULT_VISUALIZATION+f.name+"IRR.jpg", shapeVisu)
                 mask = np.zeros_like(im)
                 mask[:,:,0] = shapeExt
                 mask[:,:,1] = shapeExt
                 mask[:,:,2] = shapeExt
                 masked_image = cv2.subtract(im, cv2.bitwise_not(mask))
-                cv2.imwrite(args.outputDir+f.fragDir+f.name+"_IRR.png", masked_image)
-                cv2.imwrite(args.outputDir+f.resultDir+f.name+"_IRR.png", segmentation.crop_image(masked_image, pixel_value=0))
+                cv2.imwrite(args.outputDir+f.fragDir+f.name+"_IRR.jpg", masked_image)
+                cv2.imwrite(args.outputDir+f.resultDir+f.name+"_IRR.jpg", segmentation.crop_image(masked_image, pixel_value=0))
+            except segmentation.MarkerNotFoundException:
+                file_with_err.append(current_file)
+                logfile.write(" Couldn't detect markers!!!!\n")
 
-
-            if(f.IRV_file):
-                logfile.write("        extracting IRV shape from : {}\n".format(f.IRV_file))
-                im = cv2.imread(fragDir+f.IRV_file)
-                object = cv2.cvtColor(cv2.imread(args.object), cv2.COLOR_BGR2GRAY)
+        if(f.IRV_file):
+            logfile.write("        extracting IRV shape from : {}\n".format(f.IRV_file))
+            current_file = fragDir+f.IRV_file
+            im = cv2.imread(current_file)
+            object = cv2.cvtColor(cv2.imread(args.object), cv2.COLOR_BGR2GRAY)
+            try:
                 shapeExt, ppc = segmentation.extractShape(im, True, 15, shape_arucoMarkers, shape_arucoDict, object, shape_ellipseSize, shape_blurSize)
                 f.IRV_pixelsPerCentimeter = ppc
                 shapeVisu = segmentation.createMaskVisualization(im, shapeExt)
                 cv2.imwrite(fragDir+dataconfig.FRAGMENT_SHAPE_MASK_IRV, shapeExt)
                 f.IRV_shapeMask = dataconfig.FRAGMENT_SHAPE_MASK_IRV
-                cv2.imwrite(args.outputDir+dataconfig.RESULT_VISUALIZATION+f.name+"IRV.png", shapeVisu)
+                cv2.imwrite(args.outputDir+dataconfig.RESULT_VISUALIZATION+f.name+"IRV.jpg", shapeVisu)
                 mask = np.zeros_like(im)
                 mask[:,:,0] = shapeExt
                 mask[:,:,1] = shapeExt
                 mask[:,:,2] = shapeExt
                 masked_image = cv2.subtract(im, cv2.bitwise_not(mask))
-                cv2.imwrite(args.outputDir+f.fragDir+f.name+"_IRV.png", masked_image)
-                cv2.imwrite(args.outputDir+f.resultDir+f.name+"_IRV.png", segmentation.crop_image(masked_image, pixel_value=0))
+                cv2.imwrite(args.outputDir+f.fragDir+f.name+"_IRV.jpg", masked_image)
+                cv2.imwrite(args.outputDir+f.resultDir+f.name+"_IRV.jpg", segmentation.crop_image(masked_image, pixel_value=0))
+            except segmentation.MarkerNotFoundException:
+                file_with_err.append(current_file)
+                logfile.write(" Couldn't detect markers!!!!\n")
 
-            if(f.COLR_file):
-                logfile.write("        extracting COLR shape from : {}\n".format(f.COLR_file))
-                im = cv2.imread(fragDir+f.COLR_file)
+        if(f.COLR_file):
+            logfile.write("        extracting COLR shape from : {}\n".format(f.COLR_file))
+            current_file = fragDir+f.COLR_file
+            im = cv2.imread(current_file)
+            try:
                 object = cv2.cvtColor(cv2.imread(args.object), cv2.COLOR_BGR2GRAY)
                 shapeExt, ppc = segmentation.extractShape(im, True, 15, shape_arucoMarkers, shape_arucoDict, object, shape_ellipseSize, shape_blurSize)
                 f.COLR_pixelsPerCentimeter = ppc
                 shapeVisu = segmentation.createMaskVisualization(im, shapeExt)
                 cv2.imwrite(fragDir+dataconfig.FRAGMENT_SHAPE_MASK_COLR, shapeExt)
                 f.COLR_shapeMask = dataconfig.FRAGMENT_SHAPE_MASK_COLR
-                cv2.imwrite(args.outputDir+dataconfig.RESULT_VISUALIZATION+f.name+"COLR.png", shapeVisu)
+                cv2.imwrite(args.outputDir+dataconfig.RESULT_VISUALIZATION+f.name+"COLR.jpg", shapeVisu)
                 mask = np.zeros_like(im)
                 mask[:,:,0] = shapeExt
                 mask[:,:,1] = shapeExt
                 mask[:,:,2] = shapeExt
                 masked_image = cv2.subtract(im, cv2.bitwise_not(mask))
-                cv2.imwrite(args.outputDir+f.fragDir+f.name+"_COLR.png", masked_image)
-                cv2.imwrite(args.outputDir+f.resultDir+f.name+"_COLR.png", segmentation.crop_image(masked_image, pixel_value=0))
-
-            if(f.COLV_file):
-                logfile.write("        extracting COLV shape from : {}\n".format(f.COLV_file))
-                im = cv2.imread(fragDir+f.COLV_file)
-                object = cv2.cvtColor(cv2.imread(args.object), cv2.COLOR_BGR2GRAY)
+                cv2.imwrite(args.outputDir+f.fragDir+f.name+"_COLR.jpg", masked_image)
+                cv2.imwrite(args.outputDir+f.resultDir+f.name+"_COLR.jpg", segmentation.crop_image(masked_image, pixel_value=0))
+            except segmentation.MarkerNotFoundException:
+                file_with_err.append(current_file)
+                logfile.write(" Couldn't detect markers!!!!\n")
+        if(f.COLV_file):
+            logfile.write("        extracting COLV shape from : {}\n".format(f.COLV_file))
+            current_file = fragDir+f.COLV_file
+            im = cv2.imread(current_file)
+            object = cv2.cvtColor(cv2.imread(args.object), cv2.COLOR_BGR2GRAY)
+            try:
                 shapeExt, ppc = segmentation.extractShape(im, True, 15, shape_arucoMarkers, shape_arucoDict, object, shape_ellipseSize, shape_blurSize)
                 f.COLV_pixelsPerCentimeter = ppc
                 shapeVisu = segmentation.createMaskVisualization(im, shapeExt)
                 cv2.imwrite(fragDir+dataconfig.FRAGMENT_SHAPE_MASK_COLV, shapeExt)
                 f.COLV_shapeMask = dataconfig.FRAGMENT_SHAPE_MASK_COLV
-                cv2.imwrite(args.outputDir+dataconfig.RESULT_VISUALIZATION+f.name+"COLV.png", shapeVisu)
+                cv2.imwrite(args.outputDir+dataconfig.RESULT_VISUALIZATION+f.name+"COLV.jpg", shapeVisu)
                 mask = np.zeros_like(im)
                 mask[:,:,0] = shapeExt
                 mask[:,:,1] = shapeExt
                 mask[:,:,2] = shapeExt
                 masked_image = cv2.subtract(im, cv2.bitwise_not(mask))
-                cv2.imwrite(args.outputDir+f.fragDir+f.name+"_COLV.png", masked_image)
-                cv2.imwrite(args.outputDir+f.resultDir+f.name+"_COLV.png", segmentation.crop_image(masked_image, pixel_value=0))
+                cv2.imwrite(args.outputDir+f.fragDir+f.name+"_COLV.jpg", masked_image)
+                cv2.imwrite(args.outputDir+f.resultDir+f.name+"_COLV.jpg", segmentation.crop_image(masked_image, pixel_value=0))
+            except segmentation.MarkerNotFoundException:
+                file_with_err.append(current_file)
+                logfile.write(" Couldn't detect markers!!!!\n")
 
-        except segmentation.MarkerNotFoundException:
-            logfile.write(" Couldn't detect markers!!!!\n")
-        
+    with open('errors.txt', 'w') as f:
+        f.write('\n'.join(file_with_err))
     logfile.write("Shape extraction is over.\n")
     # logfile.write("list of extracted fragments :\n")
     # for k,f in fragments.items():
